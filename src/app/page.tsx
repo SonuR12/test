@@ -2,7 +2,7 @@ import InvoiceForm from '@/components/ui/form/form'
 import React from 'react'
 
 const metadata = {
-  title: 'Invoice Generator',
+  title: 'Invoice Form',
   description: 'Generating invoices made easy with Next.js and TypeScript',
 }
 
