@@ -26,6 +26,7 @@ const invoiceSchema = z.object({
 type InvoiceFormData = z.infer<typeof invoiceSchema>;
 
 export default function InvoiceForm() {
+
   function generateInvoiceID() {
     return Math.floor(Math.random() * 10000000000).toString();
   }
@@ -232,7 +233,7 @@ export default function InvoiceForm() {
 </div>
 
 
-          {/* Summary */}
+          {/* Total */}
           <div className="flex justify-end mb-8">
             <div className="w-full md:w-96">
               <div className="flex flex-col">
