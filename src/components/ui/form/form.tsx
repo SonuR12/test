@@ -18,7 +18,8 @@ const itemSchema = z.object({
 const invoiceSchema = z.object({
   clientName: z.string().min(1, "Client Name is required"),
   clientAddress: z.string().min(1, "Client Address is required"),
-  gst: z.string().min(1, "GST is required"),
+  gstNumber: z.string().min(1, "GST Number is required"),
+  gstPercentage: z.string().min(1, "GST Percentage is required"),
   discount: z.string().optional(),
   items: z.array(itemSchema).min(1, "At least one item is required"),
 });
@@ -38,7 +39,8 @@ export default function InvoiceForm() {
     defaultValues: {
       clientName: "",
       clientAddress: "",
-      gst: "",
+      gstNumber: "",
+      gstPercentage: "0",
       discount: "",
       items: [{ description: "", qty: "", price: "" }],
     },
@@ -53,7 +55,7 @@ export default function InvoiceForm() {
   } = form;
   const { fields, append } = useFieldArray({ control, name: "items" });
 
-  const gst = parseFloat(watch("gst") || "7");
+  const gst = parseFloat(watch("gstPercentage") || "7");
   const discount = parseFloat(watch("discount") || "0");
   const items = watch("items");
 
@@ -86,7 +88,7 @@ export default function InvoiceForm() {
             </div>
             <div className="flex items-center gap-2">
               <div>
-                <div className="font-bold text-base md:text-lg">Invoice generator</div>
+                <div className="font-bold text-base md:text-lg">Invoice Generator</div>
               </div>
             </div>
           </div>
@@ -99,9 +101,9 @@ export default function InvoiceForm() {
                 Invoice ID - <span>{invoiceId}</span>
               </div>
               <Input type="date" placeholder="Invoice Date" className="mb-1" />
-              <Input placeholder="GST No." className="mb-1" {...register("gst")} />
-              {errors.gst && (
-                <p className="text-red-500 text-xs mt-1">{errors.gst.message}</p>
+              <Input placeholder="GST Number" className="mb-1" {...register("gstNumber")} />
+              {errors.gstNumber && (
+                <p className="text-red-500 text-xs mt-1">{errors.gstNumber.message}</p>
               )}
             </div>
             <div>
@@ -196,7 +198,7 @@ export default function InvoiceForm() {
                   type="number"
                   placeholder="GST"
                   value={gst}
-                  onChange={(e) => form.setValue("gst", e.target.value)}
+                  onChange={(e) => form.setValue("gstPercentage", e.target.value)}
                 />
               </td>
               <td className="text-center whitespace-nowrap">₹{base.toFixed(2)}</td>
