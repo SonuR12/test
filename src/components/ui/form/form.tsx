@@ -99,7 +99,7 @@ export default function InvoiceForm() {
                 Invoice ID - <span>{invoiceId}</span>
               </div>
               <Input type="date" placeholder="Invoice Date" className="mb-1" />
-              <Input type="number" placeholder="GST No." className="mb-1" {...register("gst")} />
+              <Input placeholder="GST No." className="mb-1" {...register("gst")} />
               {errors.gst && (
                 <p className="text-red-500 text-xs mt-1">{errors.gst.message}</p>
               )}
